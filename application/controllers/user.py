@@ -109,5 +109,5 @@ def logout():
     # セッションからユーザ名を取り除く (ログアウトの状態にする)
     session.pop('user', None)
     # ログインページにリダイレクトする
-    return redirect(url_for('login.login'))
+    return redirect(url_for('user.login'))
 
