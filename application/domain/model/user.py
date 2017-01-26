@@ -26,7 +26,10 @@ class User(BaseModel, db.Model):
         self.password = password
 
     def can_login(self, password):
-        return bcrypt.check_password_hash(self.password, password)
+        if self.id:
+            return bcrypt.check_password_hash(self.password, password)
+        else:
+            return False
 
     def __repr__(self):
         return "<User:" + \

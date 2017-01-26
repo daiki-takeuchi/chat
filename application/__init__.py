@@ -34,12 +34,12 @@ def before_request():
     if session.get('user') is not None:
         return
     # ログインページへの移動はそのまま
-    if request.path == '/login':
+    if request.path == '/login' or request.path == '/register':
         return
     # staticへのリクエストはそのまま
     if request.path.count('/static/'):
         return
-    return redirect(url_for('login.login'))
+    return redirect(url_for('user.login'))
 
 
 @app.route('/')

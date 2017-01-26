@@ -20,5 +20,5 @@ class PwChangeForm(FlaskForm):
 
     def validate_password(self, field):
         user = repository.find_by_id(session['user']['id'])
-        if user and not user.can_login(field.data):
+        if not user.can_login(field.data):
             raise ValidationError('現在のパスワードが違います。')
