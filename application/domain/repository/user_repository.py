@@ -25,10 +25,9 @@ class UserRepository(BaseRepository):
     def save(self, user):
         if user.id is None:
             user.created_at = datetime.today()
-            user.created_user = session['user']['user_name']
-            user.password = bcrypt.generate_password_hash(user.mail)
+            user.created_user = user.user_name
         user.updated_at = datetime.today()
-        user.updated_user = session['user']['user_name']
+        user.updated_user = user.user_name
 
         db.session.add(user)
         db.session.commit()

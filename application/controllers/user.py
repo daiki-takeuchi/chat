@@ -57,8 +57,12 @@ def register():
     if form.validate_on_submit():
         user.user_name = form.user_name.data
         user.mail = form.mail.data
+        user.password = bcrypt.generate_password_hash(form.password.data)
 
         service.save(user)
+
+        # セッションにユーザ名を保存する
+        session['user'] = user.serialize()
         flash('保存しました。')
         return redirect('/')
     return render_template('user/register.html', form=form)
@@ -70,7 +74,7 @@ def delete(user_id):
     if user is not None:
         service.destroy(user)
         flash('削除しました。')
-    return redirect('/user')
+    return redirect(url_for('user.index'))
 
 
 @bp.route('/user/pwchange', methods=['GET', 'POST'])
@@ -101,7 +105,7 @@ def login():
             session['user'] = user.serialize()
             return redirect('/')
     # ログインページを表示する
-    return render_template('login/login.html', form=form)
+    return render_template('user/login.html', form=form)
 
 
 @bp.route('/logout', methods=['GET'])

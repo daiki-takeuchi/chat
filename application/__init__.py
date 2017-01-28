@@ -42,10 +42,9 @@ def before_request():
     return redirect(url_for('user.login'))
 
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    # return render_template('home/index.html')
-    return 'home'
+    return render_template('root/index.html')
 
 
 @app.teardown_appcontext

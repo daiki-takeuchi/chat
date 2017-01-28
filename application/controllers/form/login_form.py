@@ -13,6 +13,6 @@ class LoginForm(FlaskForm):
     password = PasswordField('パスワード', [DataRequired()])
 
     def validate_password(self, field):
-        user = repository.find_by_id(self.mail.data)
+        user = repository.find_by_mail(self.mail.data)
         if not user.can_login(field.data):
             raise ValidationError('メールアドレスまたはパスワードが違います。')

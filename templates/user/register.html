@@ -56,26 +56,13 @@
                             <h2 class="card-title text-center">Register</h2>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <form class="form" method="post" action="">
+                                    <form class="form" id="form" method="post" data-toggle="validator">
+                                        {{ form.hidden_tag() }}
                                         <div class="card-content">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                    <i class="material-icons">face</i>
-                                                </span>
-                                                <input type="text" class="form-control" placeholder="First Name...">
-                                            </div>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                    <i class="material-icons">email</i>
-                                                </span>
-                                                <input type="text" class="form-control" placeholder="Email...">
-                                            </div>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                    <i class="material-icons">lock_outline</i>
-                                                </span>
-                                                <input type="password" placeholder="Password..." class="form-control" />
-                                            </div>
+                                            {{ render_field(form.user_name, required="true", icons="face") }}
+                                            {{ render_field(form.mail, required="true", icons="email") }}
+                                            {{ render_field(form.password, required="true", icons="lock_outline") }}
+                                            {{ render_field(form.password_confirmation, required="true", icons="lock_outline") }}
                                         </div>
                                         <div class="footer text-center">
                                             <button class="btn btn-primary btn-round">Get Started</button>
