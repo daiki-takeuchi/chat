@@ -39,13 +39,13 @@
                     </div>
                     <div class="info">
                         <a data-toggle="collapse" href="#collapseExample" class="collapsed">
-                            竹内大貴
+                            {{ session.user.user_name }}
                             <b class="caret"></b>
                         </a>
                         <div class="collapse" id="collapseExample">
                             <ul class="nav">
                                 <li>
-                                    <a href="#">My Profile</a>
+                                    <a href="{{ url_for('user.detail', user_id=session.user.id) }}">My Profile</a>
                                 </li>
                                 <li>
                                     <a href="{{ url_for('user.logout') }}">Logout</a>
@@ -55,6 +55,12 @@
                     </div>
                 </div>
                 <ul class="nav">
+                    <li>
+                        <a href="/">
+                            <i class="material-icons">home</i>
+                            <p>ホーム</p>
+                        </a>
+                    </li>
                     <li>
                         <a href="#">
                             <i class="material-icons">person</i>
@@ -121,7 +127,11 @@
                                 </div>
                             </div>
                             <div class="card">
+                                <div class="card-header card-header-icon" data-background-color="green">
+                                    <i class="material-icons">language</i>
+                                </div>
                                 <div class="card-content">
+                                    <h4 class="card-title">Timeline</h4>
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="table-responsive">
@@ -129,15 +139,13 @@
                                                     <tbody>
                                                         <tr>
                                                             <td width="50px">
-                                                                <div class="img-thumbnail img-circle">
-                                                                    <img src="{{ url_for('static', filename='img/default-avatar.png') }}">
+                                                                <div>
+                                                                    <img class="img-circle" src="{{ url_for('static', filename='img/default-avatar.png') }}">
                                                                 </div>
                                                             </td>
+                                                            <td width="100px"><a href="{{ url_for('user.detail', user_id='1') }}">竹内大貴</a></td>
                                                             <td>test</td>
                                                             <td class="td-actions text-right">
-                                                                <button type="button" rel="tooltip" class="btn btn-success">
-                                                                    <i class="material-icons">edit</i>
-                                                                </button>
                                                                 <button type="button" rel="tooltip" class="btn btn-danger">
                                                                     <i class="material-icons">close</i>
                                                                 </button>
@@ -145,15 +153,13 @@
                                                         </tr>
                                                         <tr>
                                                             <td width="50px">
-                                                                <div class="img-thumbnail img-circle">
-                                                                    <img src="{{ url_for('static', filename='img/default-avatar.png') }}">
+                                                                <div>
+                                                                    <img class="img-circle" src="{{ url_for('static', filename='img/default-avatar.png') }}">
                                                                 </div>
                                                             </td>
+                                                            <td width="100px"><a href="{{ url_for('user.detail', user_id='1') }}">竹内大貴</a></td>
                                                             <td>test2</td>
                                                             <td class="td-actions text-right">
-                                                                <button type="button" rel="tooltip" class="btn btn-success">
-                                                                    <i class="material-icons">edit</i>
-                                                                </button>
                                                                 <button type="button" rel="tooltip" class="btn btn-danger">
                                                                     <i class="material-icons">close</i>
                                                                 </button>
@@ -178,7 +184,7 @@
                                     <h6 class="category text-gray">Programmer</h6>
                                     <h4 class="card-title">竹内大貴</h4>
                                     <p class="description">
-                                        Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
+                                        じゅげむ　じゅげむ　ごこうのすりきれ　かいじゃりすいぎょの　すいぎょうまつ　うんらいまつ　ふうらいまつ　くうねるところにすむところ　やぶらこうじのぶらこうじ　ぱいぽ　ぱいぽ　ぱいぽのしゅーりんがん　しゅーりんがんのぐーりんだい　ぐーりんだいのぽんぽこぴーの　ぽんぽこなーの　ちょうきゅうめいのちょうすけ
                                     </p>
                                     <a href="#" class="btn btn-rose btn-round">プロフィールを編集</a>
                                 </div>
