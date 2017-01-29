@@ -1,3 +1,4 @@
+{% extends "layout.html" %}
 {% from "_formhelpers.html" import render_field %}
 <!doctype html>
 <html>
@@ -73,19 +74,7 @@
                     </div>
                 </div>
             </div>
-            <footer class="footer">
-                <div class="container">
-                    <nav class="pull-left">
-                    </nav>
-                    <p class="copyright pull-right">
-                        &copy; 1988-
-                        <script>
-                            document.write(new Date().getFullYear())
-                        </script>
-                        <a href="http://technoplan-inc.co.jp" target="_blank">Technoplan inc.</a> All rights reserved.
-                    </p>
-                </div>
-            </footer>
+            {% include "footer.html" %}
         </div>
     </div>
 </body>
