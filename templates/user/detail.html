@@ -1,45 +1,47 @@
 {% extends "layout.html" %}
 {% from "_formhelpers.html" import render_field %}
-{% block title %}ユーザー登録{% endblock %}
-{% block content_header %}
-  <h1>
-    <a href="{{ url_for('.index') }}" class="btn btn-default">
-      <i class="fa fa-arrow-left"></i> 一覧に戻る
-    </a>
-  </h1>
-  <ol class="breadcrumb">
-    <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
-    <li><i class="fa fa-database"></i> マスタ管理</li>
-    <li><i class="fa fa-user"></i> ユーザーマスタ</li>
-    <li class="active">登録</li>
-  </ol>
-{% endblock %}
-{% block main_content %}
-  <div class="box box-success">
-    <div class="box-header with-border">
-      <h3 class="box-title"><i class="fa fa-search"></i> 詳細情報</h3>
-      <div class="box-tools">
-        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-      </div>
+{% block main_panel %}
+<nav class="navbar navbar-transparent navbar-absolute">
+    <div class="container-fluid">
+        <div class="navbar-minimize">
+            <button id="minimizeSidebar" class="btn btn-round btn-white btn-fill btn-just-icon">
+                <i class="material-icons visible-on-sidebar-regular">more_vert</i>
+                <i class="material-icons visible-on-sidebar-mini">view_list</i>
+            </button>
+        </div>
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <p class="navbar-brand"> Profile </p>
+        </div>
+        <div class="collapse navbar-collapse">
+            <form class="navbar-form navbar-right" role="search">
+                <div class="form-group form-search is-empty">
+                    <input type="text" class="form-control" placeholder="Search">
+                    <span class="material-input"></span>
+                </div>
+                <button type="submit" class="btn btn-white btn-round btn-just-icon">
+                    <i class="material-icons">search</i>
+                    <div class="ripple-container"></div>
+                </button>
+            </form>
+        </div>
     </div>
-    <form class="form-horizontal" method="post">
-    {{ form.hidden_tag() }}
-      <!-- /.box-header -->
-      <div class="box-body">
+</nav>
+<div class="content">
+    <div class="container-fluid">
         <div class="row">
-          {{ render_field(form.shain_number, "col-xs-6", "required") }}
-          {{ render_field(form.user_name, "col-xs-6", "required") }}
+            <div class="col-md-8">
+                {% include "user/timeline.html" %}
+            </div>
+            <div class="col-md-4">
+                {% include "profile.html" %}
+            </div>
         </div>
-        <div class="row">
-          {{ render_field(form.mail, "col-xs-6", "required") }}
-        </div>
-        <!-- /.row -->
-      </div>
-      <!-- /.box-body -->
-      <div class="box-footer">
-        <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-save"></i> 保存</button>
-      </div>
-    </form>
-  </div>
-  <!-- /.box -->
+    </div>
+</div>
 {% endblock %}

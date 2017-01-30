@@ -6,11 +6,15 @@
     </div>
     <div class="card-content">
         <h6 class="category text-gray">Programmer</h6>
-        <h4 class="card-title">竹内大貴</h4>
+        <h4 class="card-title">{{ user.user_name }}</h4>
         <p class="description">
             じゅげむ　じゅげむ　ごこうのすりきれ　かいじゃりすいぎょの　すいぎょうまつ　うんらいまつ　ふうらいまつ　くうねるところにすむところ　やぶらこうじのぶらこうじ　ぱいぽ　ぱいぽ　ぱいぽのしゅーりんがん　しゅーりんがんのぐーりんだい　ぐーりんだいのぽんぽこぴーの　ぽんぽこなーの　ちょうきゅうめいのちょうすけ
         </p>
-        <a href="#" class="btn btn-rose btn-round">プロフィールを編集</a>
+        {% if session.user.id == user.id %}
+            <a href="#" class="btn btn-rose btn-round">プロフィールを編集</a>
+        {% else %}
+            <a href="#" class="btn btn-rose btn-round">フォローする</a>
+        {% endif %}
     </div>
     <div class="card-footer">
         <div class="pull-left">

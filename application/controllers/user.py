@@ -11,10 +11,12 @@ from flask import url_for
 from application import bcrypt
 from application.controllers.form.login_form import LoginForm
 from application.controllers.form.user_form import UserForm
+from application.service.post_service import PostService
 from application.service.user_service import UserService
 
 bp = Blueprint('user', __name__)
 service = UserService()
+post_service = PostService()
 
 
 @bp.route('/user', methods=['GET', 'POST'])
@@ -24,28 +26,17 @@ def index(page=1):
     return render_template('user/index.html', pagination=pagination)
 
 
-@bp.route('/user/page/<int:page>', methods=['GET', 'POST'])
-def user_page(page=1):
-    return index(page)
-
-
 @bp.route('/user/<user_id>', methods=['GET', 'POST'])
-def detail(user_id=None):
+def detail(user_id, page=1):
     user = service.find_by_id(user_id)
-    current_app.logger.debug(str(user))
+    timelines = post_service.find_by_user_id(page, user_id)
 
-    if user is None and user_id is not None:
-        return abort(404)
-    form = UserForm(request.form, user)
+    return render_template('user/detail.html', timelines=timelines, user=user)
 
-    if form.validate_on_submit():
-        user.user_name = form.user_name.data
-        user.mail = form.mail.data
 
-        service.save(user)
-        flash('保存しました。')
-        return redirect(url_for('.detail', user_id=user.id))
-    return render_template('user/detail.html', form=form)
+@bp.route('/user/<user_id>/page/<int:page>', methods=['GET', 'POST'])
+def page(user_id, page=1):
+    return detail(user_id, page)
 
 
 @bp.route('/register', methods=['GET', 'POST'])

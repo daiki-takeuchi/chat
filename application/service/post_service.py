@@ -4,9 +4,6 @@ from application.domain.repository.post_repository import PostRepository
 class PostService(object):
     repository = PostRepository()
 
-    def find(self, page, content):
-        return self.repository.find(page, content)
-
     def find_all(self, page):
         return self.repository.find_all(page)
 
@@ -17,7 +14,7 @@ class PostService(object):
         return self.repository.find_by_user_id(page, user_id)
 
     def find_timelines(self, page, user_id):
-        return self.repository.find_by_user_id(page, user_id)
+        return self.repository.find_all(page)
 
     def save(self, user):
         return self.repository.save(user)
