@@ -1,0 +1,46 @@
+<div class="card">
+    <div class="card-header card-header-icon" data-background-color="green">
+        <i class="material-icons">language</i>
+    </div>
+    <div class="card-content">
+        <h4 class="card-title">Timeline</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <tbody>
+                            <tr>
+                                <td width="50px">
+                                    <div>
+                                        <img class="img-circle" src="{{ url_for('static', filename='img/default-avatar.png') }}">
+                                    </div>
+                                </td>
+                                <td width="100px"><a href="{{ url_for('user.detail', user_id='1') }}">竹内大貴</a></td>
+                                <td>test</td>
+                                <td class="td-actions text-right">
+                                    <button type="button" rel="tooltip" class="btn btn-danger">
+                                        <i class="material-icons">close</i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="50px">
+                                    <div>
+                                        <img class="img-circle" src="{{ url_for('static', filename='img/default-avatar.png') }}">
+                                    </div>
+                                </td>
+                                <td width="100px"><a href="{{ url_for('user.detail', user_id='1') }}">竹内大貴</a></td>
+                                <td>test2</td>
+                                <td class="td-actions text-right">
+                                    <button type="button" rel="tooltip" class="btn btn-danger">
+                                        <i class="material-icons">close</i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

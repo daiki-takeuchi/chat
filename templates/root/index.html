@@ -56,83 +56,10 @@
                         </form>
                     </div>
                 </div>
-                <div class="card">
-                    <div class="card-header card-header-icon" data-background-color="green">
-                        <i class="material-icons">language</i>
-                    </div>
-                    <div class="card-content">
-                        <h4 class="card-title">Timeline</h4>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="table-responsive">
-                                    <table class="table table-hover">
-                                        <tbody>
-                                            <tr>
-                                                <td width="50px">
-                                                    <div>
-                                                        <img class="img-circle" src="{{ url_for('static', filename='img/default-avatar.png') }}">
-                                                    </div>
-                                                </td>
-                                                <td width="100px"><a href="{{ url_for('user.detail', user_id='1') }}">竹内大貴</a></td>
-                                                <td>test</td>
-                                                <td class="td-actions text-right">
-                                                    <button type="button" rel="tooltip" class="btn btn-danger">
-                                                        <i class="material-icons">close</i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td width="50px">
-                                                    <div>
-                                                        <img class="img-circle" src="{{ url_for('static', filename='img/default-avatar.png') }}">
-                                                    </div>
-                                                </td>
-                                                <td width="100px"><a href="{{ url_for('user.detail', user_id='1') }}">竹内大貴</a></td>
-                                                <td>test2</td>
-                                                <td class="td-actions text-right">
-                                                    <button type="button" rel="tooltip" class="btn btn-danger">
-                                                        <i class="material-icons">close</i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {% include "user/timeline.html" %}
             </div>
             <div class="col-md-4">
-                <div class="card card-profile">
-                    <div class="card-avatar">
-                        <a href="#">
-                            <img class="img" src="{{ url_for('static', filename='img/default-avatar.png') }}" />
-                        </a>
-                    </div>
-                    <div class="card-content">
-                        <h6 class="category text-gray">Programmer</h6>
-                        <h4 class="card-title">竹内大貴</h4>
-                        <p class="description">
-                            じゅげむ　じゅげむ　ごこうのすりきれ　かいじゃりすいぎょの　すいぎょうまつ　うんらいまつ　ふうらいまつ　くうねるところにすむところ　やぶらこうじのぶらこうじ　ぱいぽ　ぱいぽ　ぱいぽのしゅーりんがん　しゅーりんがんのぐーりんだい　ぐーりんだいのぽんぽこぴーの　ぽんぽこなーの　ちょうきゅうめいのちょうすけ
-                        </p>
-                        <a href="#" class="btn btn-rose btn-round">プロフィールを編集</a>
-                    </div>
-                    <div class="card-footer">
-                        <div class="pull-left">
-                            <p>ツイート</p>
-                            <p>12,345</p>
-                        </div>
-                        <div class="text-center">
-                            <p>フォロー</p>
-                            <p>12,345</p>
-                        </div>
-                        <div class="pull-right">
-                            <p>フォロワー</p>
-                            <p>12,345</p>
-                        </div>
-                    </div>
-                </div>
+                {% include "user/profile.html" %}
             </div>
         </div>
     </div>

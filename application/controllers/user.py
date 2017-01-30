@@ -68,15 +68,6 @@ def register():
     return render_template('user/register.html', form=form)
 
 
-@bp.route('/user/delete/<user_id>', methods=['GET'])
-def delete(user_id):
-    user = service.find_by_id(user_id)
-    if user is not None:
-        service.destroy(user)
-        flash('削除しました。')
-    return redirect(url_for('user.index'))
-
-
 @bp.route('/user/pwchange', methods=['GET', 'POST'])
 def pwchange():
     form = PwChangeForm(request.form)
