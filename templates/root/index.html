@@ -39,12 +39,18 @@
                 <div class="card">
                     <div class="card-content">
                         <form method="post">
+                            {{ form.hidden_tag() }}
                             <div class="row">
                                 <div class="col-md-10">
                                     <div class="form-group">
-                                        <div class="form-group label-floating">
-                                            <label class="control-label"> 今どうしてる？</label>
-                                            <textarea class="form-control" rows="2"></textarea>
+                                        <div class="form-group label-floating{% if form.content.errors %} has-error is-focused{% endif %}">
+                                            <label class="control-label">{{ form.content.label.text }}</label>
+                                            {{ form.content(class_="form-control", required="true") }}
+                                            <span class="help-block with-errors">
+                                            {% for error in form.content.errors %}
+                                                <p style="margin: 0;" class="has-error">{{error}}</p>
+                                            {% endfor %}
+                                            </span>
                                         </div>
                                     </div>
                                 </div>

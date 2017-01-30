@@ -42,11 +42,6 @@ def before_request():
     return redirect(url_for('user.login'))
 
 
-@app.route('/', methods=['GET', 'POST'])
-def index():
-    return render_template('root/index.html')
-
-
 @app.teardown_appcontext
 def shutdown_session(exception=None):
     db.session.remove()

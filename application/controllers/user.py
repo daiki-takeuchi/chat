@@ -10,7 +10,6 @@ from flask import url_for
 
 from application import bcrypt
 from application.controllers.form.login_form import LoginForm
-from application.controllers.form.pwchange_form import PwChangeForm
 from application.controllers.form.user_form import UserForm
 from application.service.user_service import UserService
 
@@ -66,22 +65,6 @@ def register():
         flash('保存しました。')
         return redirect('/')
     return render_template('user/register.html', form=form)
-
-
-@bp.route('/user/pwchange', methods=['GET', 'POST'])
-def pwchange():
-    form = PwChangeForm(request.form)
-
-    # パスワード変更処理
-    if form.validate_on_submit():
-        user = service.find_by_id(session['user']['id'])
-        if user is not None:
-            user.password = bcrypt.generate_password_hash(form.new_password.data)
-            service.save(user)
-        flash('保存しました。')
-    # パスワード変更ページを表示する
-    # return render_template('pwchange/pwchange.html', form=form)
-    return 'test'
 
 
 @bp.route('/login', methods=['GET', 'POST'])
