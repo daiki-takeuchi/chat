@@ -14,5 +14,5 @@ class LoginForm(FlaskForm):
 
     def validate_password(self, field):
         user = repository.find_by_mail(self.mail.data)
-        if not user.can_login(field.data):
+        if user is None or not user.can_login(field.data):
             raise ValidationError('メールアドレスまたはパスワードが違います。')
