@@ -30,7 +30,10 @@ def index(page=1):
 def detail(user_id, page=1):
     user = service.find_by_id(user_id)
     timelines = post_service.find_by_user_id(page, user_id)
-
+    for following in user.following:
+        current_app.logger.debug('following:' + following.following.user_name)
+    for follower in user.follower:
+        current_app.logger.debug('follower:' + follower.follower.user_name)
     return render_template('user/detail.html', timelines=timelines, user=user)
 
 

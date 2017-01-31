@@ -3,7 +3,6 @@ from sqlalchemy.orm import relationship
 
 from application import db
 from application.domain.model.base_model import BaseModel
-from application.domain.model.user import User
 
 
 class Following(BaseModel, db.Model):
@@ -13,8 +12,8 @@ class Following(BaseModel, db.Model):
     user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
     following_id = Column(Integer, ForeignKey("users.id"), nullable=False)
 
-    follower = relationship(User, lazy="joined", primaryjoin=user_id == User.id)
-    following = relationship(User, lazy="joined", primaryjoin=following_id == User.id)
+    follower = relationship("User", lazy="joined", foreign_keys=[user_id])
+    following = relationship("User", lazy="joined", foreign_keys=[following_id])
 
     def __init__(self,
                  user_id=None,
@@ -32,6 +31,8 @@ class Following(BaseModel, db.Model):
                 "'id='{}".format(self.id) + \
                 "', follower='{}".format(self.follower) + \
                 "', following='{}".format(self.following) + \
+                "', user_id='{}".format(self.user_id) + \
+                "', following_id='{}".format(self.following_id) + \
                 "', created_at='{}".format(self.created_at) + \
                 "', created_user='{}".format(self.created_user) + \
                 "', updated_at='{}".format(self.updated_at) + \

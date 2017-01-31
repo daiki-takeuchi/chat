@@ -3,7 +3,6 @@ from sqlalchemy.orm import relationship
 
 from application import db
 from application.domain.model.base_model import BaseModel
-from application.domain.model.user import User
 
 
 class Post(BaseModel, db.Model):
@@ -13,7 +12,7 @@ class Post(BaseModel, db.Model):
     user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
     content = Column(String(128))
 
-    user = relationship(User, lazy='joined')
+    user = relationship("User", lazy='joined')
 
     def __init__(self,
                  user_id=None,

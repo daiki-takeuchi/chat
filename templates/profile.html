@@ -12,6 +12,8 @@
         </p>
         {% if session.user.id == user.id %}
             <a href="#" class="btn btn-rose btn-round">プロフィールを編集</a>
+        {% elif user.is_followed(session.user.id) %}
+            <a href="{{ url_for('following.unfollow', following_id=user.id) }}" class="btn btn-rose btn-round">フォロー解除</a>
         {% else %}
             <a href="{{ url_for('following.following', following_id=user.id) }}" class="btn btn-rose btn-round">フォローする</a>
         {% endif %}
@@ -19,15 +21,15 @@
     <div class="card-footer">
         <div class="pull-left">
             <p>ツイート</p>
-            <p>12,345</p>
+            <p>{{ user.posts|count|number_with_commas }}</p>
         </div>
         <div class="text-center">
             <p>フォロー</p>
-            <p>12,345</p>
+            <p>{{ user.following|count|number_with_commas }}</p>
         </div>
         <div class="pull-right">
             <p>フォロワー</p>
-            <p>12,345</p>
+            <p>{{ user.follower|count|number_with_commas }}</p>
         </div>
     </div>
 </div>

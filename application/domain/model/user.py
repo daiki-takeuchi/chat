@@ -1,7 +1,10 @@
 from sqlalchemy import Column, String
+from sqlalchemy.orm import relationship
 
 from application import db, bcrypt
 from application.domain.model.base_model import BaseModel
+from application.domain.model.following import Following
+from application.domain.model.post import Post
 
 
 class User(BaseModel, db.Model):
@@ -11,6 +14,10 @@ class User(BaseModel, db.Model):
     user_name = Column(String(128))
     mail = Column(String(128))
     password = Column(String(256))
+
+    posts = relationship(Post, cascade='all, delete-orphan')
+    following = relationship(Following, foreign_keys=[Following.user_id], cascade='all, delete-orphan')
+    follower = relationship(Following, foreign_keys=[Following.following_id], cascade='all, delete-orphan')
 
     def __init__(self,
                  user_name=None,
@@ -30,6 +37,12 @@ class User(BaseModel, db.Model):
             return bcrypt.check_password_hash(self.password, password)
         else:
             return False
+
+    def is_followed(self, user_id):
+        for follower in self.follower:
+            if follower.user_id == user_id:
+                return True
+        return False
 
     def __repr__(self):
         return "<User:" + \

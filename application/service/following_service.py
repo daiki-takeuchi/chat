@@ -19,8 +19,8 @@ class FollowingService(object):
     def find_following(self, page, user_id):
         return self.repository.find_following(page, user_id)
 
-    def save(self, user):
-        return self.repository.save(user)
+    def save(self, following):
+        return self.repository.save(following)
 
-    def destroy(self, user):
-        return self.repository.destroy(user)
+    def destroy(self, following):
+        return self.repository.destroy(following)
