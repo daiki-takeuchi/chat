@@ -13,7 +13,7 @@
         {% if session.user.id == user.id %}
             <a href="#" class="btn btn-rose btn-round">プロフィールを編集</a>
         {% else %}
-            <a href="#" class="btn btn-rose btn-round">フォローする</a>
+            <a href="{{ url_for('following.following', following_id=user.id) }}" class="btn btn-rose btn-round">フォローする</a>
         {% endif %}
     </div>
     <div class="card-footer">

@@ -1,7 +1,3 @@
-from datetime import datetime
-
-from flask import current_app
-
 from application.domain.model.post import Post
 from application.domain.repository.base_repository import BaseRepository
 

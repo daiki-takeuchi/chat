@@ -1,9 +1,8 @@
 from datetime import datetime
 
 from flask import current_app
-from flask import session
 
-from application import db, bcrypt
+from application import db
 from application.domain.model.user import User
 from application.domain.repository.base_repository import BaseRepository
 
