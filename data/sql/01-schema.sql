@@ -1,5 +1,6 @@
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS posts;
+DROP TABLE IF EXISTS following;
 
 
 CREATE TABLE IF NOT EXISTS users (
@@ -26,3 +27,15 @@ CREATE TABLE IF NOT EXISTS posts (
   PRIMARY KEY (id)
 ) ENGINE = INNODB;
 
+
+CREATE TABLE IF NOT EXISTS following (
+  id INT NOT NULL AUTO_INCREMENT,
+  user_id INT NOT NULL ,
+  following_id INT NOT NULL ,
+  created_at DATETIME NOT NULL ,
+  created_user VARCHAR(128) NOT NULL ,
+  updated_at DATETIME NOT NULL ,
+  updated_user VARCHAR(128) NOT NULL ,
+  PRIMARY KEY (id),
+  UNIQUE KEY (user_id, following_id)
+) ENGINE = INNODB;
