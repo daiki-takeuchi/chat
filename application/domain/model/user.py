@@ -15,9 +15,9 @@ class User(BaseModel, db.Model):
     mail = Column(String(128))
     password = Column(String(256))
 
-    posts = relationship(Post, cascade='all, delete-orphan')
-    following = relationship(Following, foreign_keys=[Following.user_id], cascade='all, delete-orphan')
-    follower = relationship(Following, foreign_keys=[Following.following_id], cascade='all, delete-orphan')
+    posts = relationship(Post, cascade='all, delete')
+    following = relationship(Following, foreign_keys=[Following.user_id], cascade='all, delete')
+    follower = relationship(Following, foreign_keys=[Following.following_id], cascade='all, delete')
 
     def __init__(self,
                  user_name=None,
