@@ -17,9 +17,9 @@ class UserForm(FlaskForm):
                                    validators.Email('正しいメールアドレスにしてください。')])
     password = PasswordField('新しいパスワード',[DataRequired()])
     password_confirmation = PasswordField('新しいパスワード（確認）',
-                                              [DataRequired(),
-                                               EqualTo('password',
-                                                       message='パスワードとパスワード（確認）が一致していません')])
+                                          [DataRequired(),
+                                           EqualTo('password',
+                                           message='パスワードとパスワード（確認）が一致していません')])
 
     def validate_mail(self, field):
         user = repository.find_by_mail(mail=field.data)
