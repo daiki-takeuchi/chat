@@ -83,3 +83,21 @@ def logout():
     # ログインページにリダイレクトする
     return redirect(url_for('user.login'))
 
+
+@bp.route('/profile/<user_id>', methods=['GET', 'POST'])
+def profile(user_id):
+    user = service.find_by_id(user_id)
+    form = UserForm(request.form, user)
+
+    if form.validate_on_submit():
+        user.user_name = form.user_name.data
+        user.mail = form.mail.data
+        user.password = bcrypt.generate_password_hash(form.password.data)
+
+        service.save(user)
+
+        # セッションにユーザ名を保存する
+        session['user'] = user.serialize()
+        flash('保存しました。')
+        return redirect('/')
+    return render_template('user/profile_wizard.html', form=form)

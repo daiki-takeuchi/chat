@@ -15,7 +15,7 @@ class UserForm(FlaskForm):
     mail = StringField('メールアドレス', [DataRequired(),
                                    Length(max=256),
                                    validators.Email('正しいメールアドレスにしてください。')])
-    password = PasswordField('新しいパスワード',[DataRequired()])
+    password = PasswordField('新しいパスワード', [DataRequired()])
     password_confirmation = PasswordField('新しいパスワード（確認）',
                                           [DataRequired(),
                                            EqualTo('password',

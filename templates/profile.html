@@ -11,7 +11,7 @@
             じゅげむ　じゅげむ　ごこうのすりきれ　かいじゃりすいぎょの　すいぎょうまつ　うんらいまつ　ふうらいまつ　くうねるところにすむところ　やぶらこうじのぶらこうじ　ぱいぽ　ぱいぽ　ぱいぽのしゅーりんがん　しゅーりんがんのぐーりんだい　ぐーりんだいのぽんぽこぴーの　ぽんぽこなーの　ちょうきゅうめいのちょうすけ
         </p>
         {% if session.user.id == user.id %}
-            <a href="#" class="btn btn-rose btn-round">プロフィールを編集</a>
+            <a href="{{ url_for('user.profile', user_id=session.user.id) }}" class="btn btn-rose btn-round">プロフィールを編集</a>
         {% elif user.is_followed(session.user.id) %}
             <a href="{{ url_for('following.unfollow', following_id=user.id) }}" class="btn btn-rose btn-round">フォロー解除</a>
         {% else %}
