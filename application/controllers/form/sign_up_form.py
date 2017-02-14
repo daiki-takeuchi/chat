@@ -9,7 +9,7 @@ from application.domain.repository.user_repository import UserRepository
 repository = UserRepository()
 
 
-class UserForm(FlaskForm):
+class SignUpForm(FlaskForm):
     id = IntegerField('Id')
     user_name = StringField('ユーザー名', [DataRequired(), Length(max=128)])
     mail = StringField('メールアドレス', [DataRequired(),
