@@ -5,10 +5,10 @@
         </a>
     </div>
     <div class="card-content">
-        <h6 class="category text-gray">{{ user.job }}</h6>
+        <h6 class="category text-gray">{{ user.job|filter_suppress_none }}</h6>
         <h4 class="card-title">{{ user.user_name }}</h4>
         <p class="description">
-            {{ user.self_introduction }}
+            {{ user.self_introduction|filter_suppress_none }}
         </p>
         {% if session.user.id == user.id %}
             <a href="{{ url_for('user.profile', user_id=session.user.id) }}" class="btn btn-rose btn-round">プロフィールを編集</a>
