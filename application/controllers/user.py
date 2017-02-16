@@ -11,6 +11,7 @@ from flask import url_for
 from application import bcrypt
 from application.controllers.form.login_form import LoginForm
 from application.controllers.form.sign_up_form import SignUpForm
+from application.controllers.form.user_form import UserForm
 from application.service.post_service import PostService
 from application.service.user_service import UserService
 
@@ -87,12 +88,11 @@ def logout():
 @bp.route('/profile/<user_id>', methods=['GET', 'POST'])
 def profile(user_id):
     user = service.find_by_id(user_id)
-    form = SignUpForm(request.form, user)
+    form = UserForm(request.form, user)
 
     if form.validate_on_submit():
         user.user_name = form.user_name.data
         user.mail = form.mail.data
-        user.password = bcrypt.generate_password_hash(form.password.data)
 
         service.save(user)
 

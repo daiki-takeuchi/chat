@@ -14,6 +14,8 @@ class User(BaseModel, db.Model):
     user_name = Column(String(128))
     mail = Column(String(128))
     password = Column(String(256))
+    job = Column(String(256))
+    self_introduction = Column(String(2048))
 
     posts = relationship(Post, cascade='all, delete')
     following = relationship(Following, foreign_keys=[Following.user_id], cascade='all, delete')
@@ -23,6 +25,8 @@ class User(BaseModel, db.Model):
                  user_name=None,
                  mail=None,
                  password=None,
+                 job=None,
+                 self_introduction=None,
                  created_at=None,
                  created_user=None,
                  updated_at=None,
@@ -31,6 +35,8 @@ class User(BaseModel, db.Model):
         self.user_name = user_name
         self.mail = mail
         self.password = password
+        self.job = job
+        self.self_introduction = self_introduction
 
     def can_login(self, password):
         if self.id:
@@ -49,6 +55,8 @@ class User(BaseModel, db.Model):
                 "'id='{}".format(self.id) + \
                 "', user_name='{}".format(self.user_name) + \
                 "', mail='{}".format(self.mail) + \
+                "', job='{}".format(self.job) + \
+                "', self_introduction='{}".format(self.self_introduction) + \
                 "', created_at='{}".format(self.created_at) + \
                 "', created_user='{}".format(self.created_user) + \
                 "', updated_at='{}".format(self.updated_at) + \
@@ -60,6 +68,8 @@ class User(BaseModel, db.Model):
            'id': self.id,
            'user_name': self.user_name,
            'mail': self.mail,
+           'job': self.job,
+           'self_introduction': self.self_introduction,
            'created_user': self.created_user,
            'updated_at': self.updated_at,
            'updated_user': self.updated_user

@@ -42,27 +42,27 @@
                         <!--        You can switch " data-color="purple" "  with one of the next bright colors: "green", "orange", "red", "blue"       -->
                         <div class="wizard-header">
                             <h3 class="wizard-title">
-                                Build Your Profile
+                                プロフィール編集
                             </h3>
-                            <h5>This information will let us know more about you.</h5>
+                            <h5>あなたについてもっと知ってもらおう！</h5>
                         </div>
                         <div class="wizard-navigation">
                             <ul>
                                 <li>
-                                    <a href="#about" data-toggle="tab">About</a>
+                                    <a href="#basic" data-toggle="tab">Basic</a>
                                 </li>
                                 <li>
-                                    <a href="#account" data-toggle="tab">Account</a>
+                                    <a href="#job" data-toggle="tab">Job</a>
                                 </li>
                                 <li>
-                                    <a href="#address" data-toggle="tab">Address</a>
+                                    <a href="#self-introduction" data-toggle="tab">Self Introduction</a>
                                 </li>
                             </ul>
                         </div>
                         <div class="tab-content">
-                            <div class="tab-pane" id="about">
+                            <div class="tab-pane" id="basic">
                                 <div class="row">
-                                    <h4 class="info-text"> Let's start with the basic information (with validation)</h4>
+                                    <h4 class="info-text"> 基本的な情報から始めましょう</h4>
                                     <div class="col-sm-4 col-sm-offset-1">
                                         <div class="picture-container">
                                             <div class="picture">
@@ -73,116 +73,61 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="material-icons">face</i>
-                                            </span>
-                                            <div class="form-group label-floating">
-                                                <label class="control-label">First Name
-                                                    <small>(required)</small>
-                                                </label>
-                                                <input name="firstname" type="text" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="material-icons">record_voice_over</i>
-                                            </span>
-                                            <div class="form-group label-floating">
-                                                <label class="control-label">Last Name
-                                                    <small>(required)</small>
-                                                </label>
-                                                <input name="lastname" type="text" class="form-control">
-                                            </div>
-                                        </div>
+                                        {{ render_field(form.user_name, required="true", icons="face") }}
+                                        {{ render_field(form.mail, required="true", icons="email") }}
                                     </div>
                                     <div class="col-lg-10 col-lg-offset-1">
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="material-icons">email</i>
-                                            </span>
-                                            <div class="form-group label-floating">
-                                                <label class="control-label">Email
-                                                    <small>(required)</small>
-                                                </label>
-                                                <input name="email" type="email" class="form-control">
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane" id="account">
-                                <h4 class="info-text"> What are you doing? (checkboxes) </h4>
+                            <div class="tab-pane" id="job">
+                                <h4 class="info-text"> あなたの職業は？ </h4>
                                 <div class="row">
                                     <div class="col-lg-10 col-lg-offset-1">
                                         <div class="col-sm-4">
                                             <div class="choice" data-toggle="wizard-checkbox">
-                                                <input type="checkbox" name="jobb" value="Design">
+                                                <input type="checkbox" name="job" value="Designer">
                                                 <div class="icon">
                                                     <i class="fa fa-pencil"></i>
                                                 </div>
-                                                <h6>Design</h6>
+                                                <h6>Designer</h6>
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="choice" data-toggle="wizard-checkbox">
-                                                <input type="checkbox" name="jobb" value="Code">
+                                                <input type="checkbox" name="job" value="Coder">
                                                 <div class="icon">
                                                     <i class="fa fa-terminal"></i>
                                                 </div>
-                                                <h6>Code</h6>
+                                                <h6>Coder</h6>
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="choice" data-toggle="wizard-checkbox">
-                                                <input type="checkbox" name="jobb" value="Develop">
+                                                <input type="checkbox" name="job" value="Developer">
                                                 <div class="icon">
                                                     <i class="fa fa-laptop"></i>
                                                 </div>
-                                                <h6>Develop</h6>
+                                                <h6>Developer</h6>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane" id="address">
+                            <div class="tab-pane" id="self-introduction">
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <h4 class="info-text"> Are you living in a nice area? </h4>
+                                        <h4 class="info-text"> 自己紹介 </h4>
                                     </div>
-                                    <div class="col-sm-7 col-sm-offset-1">
-                                        <div class="form-group label-floating">
-                                            <label class="control-label">Street Name</label>
-                                            <input type="text" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <div class="form-group label-floating">
-                                            <label class="control-label">Street No.</label>
-                                            <input type="text" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-5 col-sm-offset-1">
-                                        <div class="form-group label-floating">
-                                            <label class="control-label">City</label>
-                                            <input type="text" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-5">
-                                        <div class="form-group label-floating">
-                                            <label class="control-label">Country</label>
-                                            <select name="country" class="form-control">
-                                                <option disabled="" selected=""></option>
-                                                <option value="Afghanistan"> Afghanistan </option>
-                                                <option value="Albania"> Albania </option>
-                                                <option value="Algeria"> Algeria </option>
-                                                <option value="American Samoa"> American Samoa </option>
-                                                <option value="Andorra"> Andorra </option>
-                                                <option value="Angola"> Angola </option>
-                                                <option value="Anguilla"> Anguilla </option>
-                                                <option value="Antarctica"> Antarctica </option>
-                                                <option value="...">...</option>
-                                            </select>
+                                    <div class="col-sm-10 col-sm-offset-1">
+                                        <div class="form-group label-floating{% if form.self_introduction.errors %} has-error is-focused{% endif %}">
+                                            <label class="control-label">{{ form.self_introduction.label.text }}</label>
+                                            {{ form.self_introduction(class_="form-control", rows="8") }}
+                                            <span class="help-block with-errors">
+                                            {% for error in form.self_introduction.errors %}
+                                                <p style="margin: 0;" class="has-error">{{error}}</p>
+                                            {% endfor %}
+                                            </span>
                                         </div>
                                     </div>
                                 </div>

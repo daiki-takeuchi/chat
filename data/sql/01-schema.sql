@@ -8,6 +8,8 @@ CREATE TABLE IF NOT EXISTS users (
   user_name VARCHAR(128) ,
   mail VARCHAR(256) ,
   password VARCHAR(256) ,
+  job VARCHAR(256) ,
+  self_introduction VARCHAR(2048) ,
   created_at DATETIME NOT NULL ,
   created_user VARCHAR(128) NOT NULL ,
   updated_at DATETIME NOT NULL ,
