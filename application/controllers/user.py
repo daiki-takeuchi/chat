@@ -87,6 +87,10 @@ def logout():
 
 @bp.route('/profile/<user_id>', methods=['GET', 'POST'])
 def profile(user_id):
+
+    # 自分以外は編集できない
+    if str(user_id) != str(session['user']['id']):
+        return abort(404)
     user = service.find_by_id(user_id)
     form = UserForm(request.form, user)
 
