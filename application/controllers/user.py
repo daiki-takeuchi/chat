@@ -30,11 +30,10 @@ def index(page=1):
 @bp.route('/user/<user_id>', methods=['GET', 'POST'])
 def detail(user_id, page=1):
     user = service.find_by_id(user_id)
+    if user_id and user.id is None:
+        return abort(404)
     timelines = post_service.find_by_user_id(page, user_id)
-    for following in user.following:
-        current_app.logger.debug('following:' + following.following.user_name)
-    for follower in user.follower:
-        current_app.logger.debug('follower:' + follower.follower.user_name)
+
     return render_template('user/detail.html', timelines=timelines, user=user)
 
 
