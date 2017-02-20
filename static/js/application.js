@@ -102,8 +102,17 @@ page = {
             'tabClass': 'nav nav-pills',
             'nextSelector': '.btn-next',
             'previousSelector': '.btn-previous',
+            'lastSelector': '.btn-finish',
 
             onNext: function(tab, navigation, index) {
+            	var $valid = $('.wizard-card form').valid();
+            	if(!$valid) {
+            		$validator.focusInvalid();
+            		return false;
+            	}
+            },
+
+            onLast: function(tab, navigation, index) {
             	var $valid = $('.wizard-card form').valid();
             	if(!$valid) {
             		$validator.focusInvalid();

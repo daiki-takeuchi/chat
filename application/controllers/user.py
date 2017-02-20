@@ -96,6 +96,7 @@ def profile(user_id):
     if form.validate_on_submit():
         user.user_name = form.user_name.data
         user.mail = form.mail.data
+        user.self_introduction = form.self_introduction.data
 
         service.save(user)
 
