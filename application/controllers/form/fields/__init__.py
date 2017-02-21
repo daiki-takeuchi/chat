@@ -1,7 +1,8 @@
 import decimal
 from datetime import datetime
 
-from wtforms import IntegerField, DecimalField, DateField
+from wtforms import IntegerField, DecimalField, DateField, SelectMultipleField
+from wtforms import widgets
 
 
 class IntegerField(IntegerField):
@@ -42,3 +43,9 @@ class DateField(DateField):
                 self.data = datetime.strptime(date_str, self.format).date()
             except ValueError:
                 raise ValueError(self.gettext('{}はyyyy/mm/dd形式で入力してください'.format(self.label.text)))
+
+
+class MultiCheckboxField(SelectMultipleField):
+    widget = widgets.ListWidget(prefix_label=False)
+    option_widget = widgets.CheckboxInput()
+

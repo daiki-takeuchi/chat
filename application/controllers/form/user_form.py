@@ -2,6 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import ValidationError, TextAreaField
 from wtforms import validators, StringField, IntegerField
 
+from application.controllers.form.fields import MultiCheckboxField
 from application.controllers.form.validators import Length, DataRequired
 from application.domain.repository.user_repository import UserRepository
 
@@ -14,6 +15,11 @@ class UserForm(FlaskForm):
     mail = StringField('メールアドレス', [DataRequired(),
                                    Length(max=256),
                                    validators.Email('正しいメールアドレスにしてください。')])
+    string_of_files = ['one\r\ntwo\r\nthree\r\n']
+    list_of_files = string_of_files[0].split()
+    # create a list of value/description tuples
+    files = [(x, x) for x in list_of_files]
+    example = MultiCheckboxField('Label', choices=files)
     self_introduction = TextAreaField('自己紹介文', [Length(max=2048)])
 
     def validate_mail(self, field):
