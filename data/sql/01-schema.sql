@@ -6,7 +6,7 @@ DROP TABLE IF EXISTS following;
 CREATE TABLE IF NOT EXISTS users (
   id INT NOT NULL AUTO_INCREMENT,
   user_name VARCHAR(128) ,
-  mail VARCHAR(256) ,
+  mail VARCHAR(255) ,
   password VARCHAR(256) ,
   job VARCHAR(256) ,
   self_introduction VARCHAR(2048) ,

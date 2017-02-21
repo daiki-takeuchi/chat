@@ -12,7 +12,7 @@ class User(BaseModel, db.Model):
     PER_PAGE = 10
 
     user_name = Column(String(128))
-    mail = Column(String(128))
+    mail = Column(String(255))
     password = Column(String(256))
     job = Column(String(256))
     self_introduction = Column(String(2048))
