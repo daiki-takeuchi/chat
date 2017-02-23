@@ -85,15 +85,19 @@
                                 <div class="row">
                                     <div class="col-lg-10 col-lg-offset-1">
                                         {% for subfield in form.job %}
-                                            <div class="col-sm-4">
-                                            <div class="choice" data-toggle="wizard-checkbox">
+                                        <div class="col-sm-4">
+                                            <div class="choice{% if user.job.count(subfield.data) %} active{% endif %}" data-toggle="wizard-checkbox">
+                                                {% if user.job.count(subfield.data) %}
+                                                {{ subfield(checked=True) }}
+                                                {% else %}
                                                 {{ subfield }}
+                                                {% endif %}
                                                 <div class="icon">
                                                     <i class="fa fa-{{ subfield.label.text }}"></i>
                                                 </div>
                                                 <h6>{{ subfield.data }}</h6>
                                             </div>
-                                            </div>
+                                        </div>
                                         {% endfor %}
                                     </div>
                                 </div>

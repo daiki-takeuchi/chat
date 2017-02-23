@@ -105,4 +105,4 @@ def profile(user_id):
         session['user'] = user.serialize()
         flash('保存しました。')
         return redirect('/')
-    return render_template('user/profile_wizard.html', form=form)
+    return render_template('user/profile_wizard.html', form=form, user=user)
