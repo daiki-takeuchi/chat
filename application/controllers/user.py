@@ -92,11 +92,12 @@ def profile(user_id):
         return abort(404)
     user = service.find_by_id(user_id)
     form = UserForm(request.form, user)
-
+    current_app.logger.debug(request.form)
     if form.validate_on_submit():
         user.user_name = form.user_name.data
         user.mail = form.mail.data
         user.self_introduction = form.self_introduction.data
+        user.job = " / ".join(form.job.data)
 
         service.save(user)
 

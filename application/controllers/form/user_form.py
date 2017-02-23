@@ -16,10 +16,9 @@ class UserForm(FlaskForm):
                                    Length(max=256),
                                    validators.Email('正しいメールアドレスにしてください。')])
     string_of_files = ['one\r\ntwo\r\nthree\r\n']
-    list_of_files = string_of_files[0].split()
-    # create a list of value/description tuples
-    files = [(x, x) for x in list_of_files]
-    example = MultiCheckboxField('Label', choices=files)
+    job = MultiCheckboxField('job', choices=[('Designer', 'pencil'),
+                                             ('Coder', 'terminal'),
+                                             ('Developer', 'laptop')])
     self_introduction = TextAreaField('自己紹介文', [Length(max=2048)])
 
     def validate_mail(self, field):
