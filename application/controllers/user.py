@@ -21,10 +21,15 @@ post_service = PostService()
 
 
 @bp.route('/user', methods=['GET', 'POST'])
-def index(page=1):
-    user_name = request.args.get('user_name','')
+def index():
+    user_name = request.args.get('user_name', '')
+    page = int(request.args.get('page', '1'))
     pagination = service.find(page, user_name)
-    return render_template('user/index.html', pagination=pagination)
+
+    user_id = session['user']['id']
+    user = service.find_by_id(user_id)
+
+    return render_template('user/index.html', pagination=pagination, user=user)
 
 
 @bp.route('/user/<user_id>', methods=['GET', 'POST'])

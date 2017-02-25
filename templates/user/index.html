@@ -1,99 +1,112 @@
 {% extends "layout.html" %}
+{% from "_formhelpers.html" import render_field %}
 {% import "_pagination.html" as p %}
-{% block title %}ユーザーマスタ{% endblock %}
-{% block content_header %}
-  <h1>ユーザー</h1>
-  <ol class="breadcrumb">
-    <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
-    <li><i class="fa fa-database"></i> マスタ管理</li>
-    <li class="active"><i class="fa fa-user"></i> ユーザー</li>
-  </ol>
-{% endblock %}
-{% block main_content %}
-  <div class="box box-primary">
-    <div class="box-header with-border">
-      <h3 class="box-title"><i class="fa fa-search"></i> 検索条件</h3>
-
-      <div class="box-tools pull-right">
-        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-      </div>
+{% block main_panel %}
+<nav class="navbar navbar-transparent navbar-absolute">
+    <div class="container-fluid">
+        <div class="navbar-minimize">
+            <button id="minimizeSidebar" class="btn btn-round btn-white btn-fill btn-just-icon">
+                <i class="material-icons visible-on-sidebar-regular">more_vert</i>
+                <i class="material-icons visible-on-sidebar-mini">view_list</i>
+            </button>
+        </div>
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <p class="navbar-brand"> User </p>
+        </div>
+        <div class="collapse navbar-collapse">
+            <form class="navbar-form navbar-right" action="/user" role="search">
+                <div class="form-group form-search is-empty">
+                    <input type="text" name="user_name" class="form-control" placeholder="Search">
+                    <span class="material-input"></span>
+                </div>
+                <button type="submit" class="btn btn-white btn-round btn-just-icon">
+                    <i class="material-icons">search</i>
+                    <div class="ripple-container"></div>
+                </button>
+            </form>
+        </div>
     </div>
-    <form class="form-horizontal" method="get" action="{{ url_for('.index') }}">
-    <!-- /.box-header -->
-    <div class="box-body">
-      <div class="row">
-        <div class="col-md-6">
-          <input type="text" class="form-control" name="user_name" placeholder="ユーザー名" value="{{ request.args.get('user_name', '') }}">
+</nav>
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-content">
+                        <form method="get" action="{{ url_for('.index') }}">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">ユーザー名</label>
+                                            <input type="text" class="form-control" name="user_name" value="{{ request.args.get('user_name', '') }}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="submit" class="btn btn-rose pull-right">検索</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header card-header-icon" data-background-color="green">
+                        <i class="material-icons">face</i>
+                    </div>
+                    <div class="card-content">
+                        <h4 class="card-title">User</h4>
+                        <div class="row">
+                            <div class="col-md-12">
+                                {% if pagination %}
+                                    {% if pagination.total > pagination.per_page %}
+                                        {{ p.pagination_widget(pagination,'.index', user_name=request.args.get('user_name', '')) }}
+                                    {% endif %}
+                                {% endif %}
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <tbody>
+                                            {% for user in pagination.items %}
+                                            <tr>
+                                                <td width="40px">
+                                                    <div>
+                                                        <img class="img-circle" src="{{ url_for('static', filename='img/default-avatar.png') }}">
+                                                    </div>
+                                                </td>
+                                                <td width="100px"><a href="{{ url_for('user.detail', user_id=user.id) }}">{{ user.user_name }}</a></td>
+                                                <td class="td-actions text-right">
+                                                    {% if session.user.id != user.id %}
+                                                        {% if user.is_followed(session.user.id) %}
+                                                            <a href="{{ url_for('following.unfollow', following_id=user.id) }}" class="btn btn-simple btn-rose">
+                                                                <i class="material-icons">favorite</i>
+                                                            </a>
+                                                        {% else %}
+                                                            <a href="{{ url_for('following.following', following_id=user.id) }}" class="btn btn-simple btn-rose">
+                                                                <i class="material-icons">favorite_border</i>
+                                                            </a>
+                                                        {% endif %}
+                                                    {% endif %}
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                {% include "profile.html" %}
+            </div>
         </div>
-        <div class="col-md-6">
-          <input type="text" class="form-control" name="shain_number" placeholder="社員番号" value="{{ request.args.get('shain_number', '') }}">
-        </div>
-      </div>
-      <!-- /.row -->
     </div>
-    <!-- /.box-body -->
-    <div class="box-footer">
-      <button type="submit" class="btn btn-sm btn-primary pull-right"><i class="fa fa-search"></i> 検索</button>
-    </div>
-    </form>
-  </div>
-  <!-- /.box -->
-
-  <!-- /.row -->
-  <div class="row">
-    <div class="col-xs-12">
-      <div class="box">
-        <div class="box-header">
-          {% if pagination %}
-            {% if pagination.total > pagination.per_page %}
-              {{ p.pagination_widget(pagination,'.user_page', shain_number=request.args.get('shain_number', ''), user_name=request.args.get('user_name', '')) }}
-            {% endif %}
-          {% endif %}
-          <a href="{{ url_for('.create') }}" class="btn btn-sm btn-success pull-right">
-            <i class="fa fa-user-plus"></i> 新規登録
-          </a>
-
-        </div>
-        <!-- /.box-header -->
-        <div class="box-body table-responsive no-padding">
-          <table class="table table-hover">
-            <tr>
-              <th width="50px">#</th>
-              <th>社員番号</th>
-              <th>ユーザー名</th>
-              <th>メールアドレス</th>
-              <th width="70px" class="center"></th>
-              <th width="70px" class="center"></th>
-            </tr>
-            {% for user in pagination.items %}
-            <tr>
-              <td>{{ (pagination.prev_num * pagination.per_page) + loop.index }}</td>
-              <td>{{ user.shain_number }}</td>
-              <td>{{ user.user_name|filter_suppress_none }}</td>
-              <td>{{ user.mail|filter_suppress_none }}</td>
-              <td>
-                <a class="btn btn-sm btn-default" href="{{ url_for('.detail', user_id=user.id) }}">
-                   詳細 <i class="fa fa-navicon"></i>
-                </a>
-              </td>
-              <td>
-                <a class="btn btn-sm btn-danger" href="{{ url_for('.delete', user_id=user.id) }}">
-                  <i class="fa fa-trash"></i> 削除
-                </a>
-              </td>
-            </tr>
-            {% endfor %}
-          </table>
-        </div>
-        <!-- /.box-body -->
-        <div class="box-footer clearfix">
-          <a href="{{ url_for('.create') }}" class="btn btn-sm btn-success pull-right">
-            <i class="fa fa-user-plus"></i> 新規登録
-          </a>
-        </div>
-        <!-- /.box-footer -->
-      </div>
-      <!-- /.box -->
-    </div>
-  </div>
+</div>
 {% endblock %}
