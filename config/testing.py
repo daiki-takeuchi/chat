@@ -1,5 +1,6 @@
 DEBUG = False
 TESTING = True
+WTF_CSRF_ENABLED = False
 
 # CloudSQL & SQLAlchemy configuration
 HOST = 'localhost'

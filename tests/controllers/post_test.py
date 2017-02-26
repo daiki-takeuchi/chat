@@ -17,6 +17,7 @@ class PostTests(unittest.TestCase):
 
     def setUp(self):
         # creates a test client
+        app.config.from_object('config.testing')
         self.app = app.test_client()
         # propagate the exceptions to the test client
         self.app.testing = True
