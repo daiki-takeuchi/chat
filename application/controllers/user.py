@@ -20,7 +20,7 @@ service = UserService()
 post_service = PostService()
 
 
-@bp.route('/user', methods=['GET', 'POST'])
+@bp.route('/user', methods=['GET'])
 def index():
     user_name = request.args.get('user_name', '')
     page = int(request.args.get('page', '1'))

@@ -119,3 +119,14 @@ class UserTests(BaseTestCase):
         })
         self.assertEqual(result.status_code, 302)
         ok_('/' in result.headers['Location'])
+
+    # ユーザー検索画面に遷移できる
+    def test_get_index(self):
+        # ログインする
+        mail = 'test@test.com'
+        self.app.post('/login', data={
+            'mail': mail,
+            'password': 'test'
+        })
+        result = self.app.get('/user')
+        self.assertEqual(result.status_code, 200)
