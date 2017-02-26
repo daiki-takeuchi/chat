@@ -1,29 +1,15 @@
-import unittest
-
 from nose.tools import ok_
 
-from application import app
+from tests import BaseTestCase
 
 
-class PostTests(unittest.TestCase):
-
-    @classmethod
-    def setUpClass(cls):
-        pass
-
-    @classmethod
-    def tearDownClass(cls):
-        pass
+class PostTests(BaseTestCase):
 
     def setUp(self):
-        # creates a test client
-        app.config.from_object('config.testing')
-        self.app = app.test_client()
-        # propagate the exceptions to the test client
-        self.app.testing = True
+        super(PostTests, self).setUp()
 
     def tearDown(self):
-        pass
+        super(PostTests, self).tearDown()
 
     # ログインしていない場合は、ログイン画面に移動する。
     def test_root_status_code(self):
