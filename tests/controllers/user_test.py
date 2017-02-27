@@ -125,7 +125,7 @@ class UserTests(BaseTestCase):
         user = self.repository.find_by_mail(mail)
 
         result = self.app.post('/profile/' + str(user.id), data={
-            'user_name': user.user_name + '_test',
+            'user_name': user.user_name,
             'mail': mail,
             'self_introduction': 'test',
             'job': ['Designer', 'Coder']
