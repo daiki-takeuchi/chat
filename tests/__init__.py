@@ -8,24 +8,24 @@ class BaseTestCase(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        pass
+        # creates a test client
+        app.config.from_object('config.testing')
+        cls.app = app.test_client()
+        # propagate the exceptions to the test client
+        cls.app.testing = True
+        db.drop_all()
+        db.create_all()
+        cls().create_user()
 
     @classmethod
     def tearDownClass(cls):
-        pass
+        db.session.remove()
 
     def setUp(self):
-        # creates a test client
-        app.config.from_object('config.testing')
-        self.app = app.test_client()
-        # propagate the exceptions to the test client
-        self.app.testing = True
-        db.drop_all()
-        db.create_all()
-        self.create_user()
+        pass
 
     def tearDown(self):
-        db.session.remove()
+        pass
 
     def create_user(self):
         self.app.post('/register', data={

@@ -16,6 +16,11 @@ class StringHelperTests(BaseTestCase):
         actual = filter_suppress_none(None)
         self.assertEqual(actual, expected)
 
+    def test_filter_suppress_not_none(self):
+        expected = 'test'
+        actual = filter_suppress_none('test')
+        self.assertEqual(actual, expected)
+
     def test_number_with_commas(self):
         expected = '3,000'
         actual = number_with_commas(3000)
