@@ -48,7 +48,7 @@ class UserTests(BaseTestCase):
     def test_register(self):
         result = self.app.post('/register', data={
             'user_name': '単体テスト',
-            'mail': datetime.datetime.now().strftime('%Y%m%d-%H%M%S') + '@test.com',
+            'mail': datetime.datetime.now().strftime('%Y%m%d-%H%M%S') + 'test_register@test.com',
             'password': 'test',
             'password_confirmation': 'test'
         })
