@@ -32,7 +32,7 @@ def index():
     return render_template('user/index.html', pagination=pagination, user=user)
 
 
-@bp.route('/user/<user_id>', methods=['GET', 'POST'])
+@bp.route('/user/<user_id>', methods=['GET'])
 def detail(user_id, page=1):
     user = service.find_by_id(user_id)
     if user_id and user.id is None:
@@ -42,7 +42,7 @@ def detail(user_id, page=1):
     return render_template('user/detail.html', timelines=timelines, user=user)
 
 
-@bp.route('/user/<user_id>/page/<int:page>', methods=['GET', 'POST'])
+@bp.route('/user/<user_id>/page/<int:page>', methods=['GET'])
 def page(user_id, page=1):
     return detail(user_id, page)
 

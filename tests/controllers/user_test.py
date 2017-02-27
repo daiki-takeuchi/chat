@@ -130,3 +130,49 @@ class UserTests(BaseTestCase):
         })
         result = self.app.get('/user')
         self.assertEqual(result.status_code, 200)
+
+    # ユーザー詳細画面に遷移できる
+    def test_get_detail(self):
+        # ログインする
+        self.app.post('/login', data={
+            'mail': 'test@test.com',
+            'password': 'test'
+        })
+        user = self.repository.find_by_mail('test@test2.com')
+        result = self.app.get('/user/' + str(user.id))
+        self.assertEqual(result.status_code, 200)
+
+    # 存在しないユーザー詳細画面には遷移できない
+    def test_detail_not_exist_user(self):
+        # ログインする
+        self.app.post('/login', data={
+            'mail': 'test@test.com',
+            'password': 'test'
+        })
+        result = self.app.get('/user/0')
+        self.assertEqual(result.status_code, 404)
+
+    # ユーザー詳細で２ページ目の発言が表示できる
+    def test_detail_page(self):
+        mail = 'test@test.com'
+        self.app.post('/login', data={
+            'mail': mail,
+            'password': 'test'
+        })
+        user = self.repository.find_by_mail(mail)
+
+        # 10件以上のツイートを作成
+        self.app.post('/', data={'content': 'test1'})
+        self.app.post('/', data={'content': 'test2'})
+        self.app.post('/', data={'content': 'test3'})
+        self.app.post('/', data={'content': 'test4'})
+        self.app.post('/', data={'content': 'test5'})
+        self.app.post('/', data={'content': 'test6'})
+        self.app.post('/', data={'content': 'test7'})
+        self.app.post('/', data={'content': 'test8'})
+        self.app.post('/', data={'content': 'test9'})
+        self.app.post('/', data={'content': 'test10'})
+        self.app.post('/', data={'content': 'test11'})
+
+        result = self.app.get('/user/' + str(user.id) + '/page/2')
+        self.assertEqual(result.status_code, 200)
