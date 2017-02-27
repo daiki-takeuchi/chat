@@ -35,18 +35,6 @@ class DataRequired(validators.DataRequired):
             raise StopValidation(message)
 
 
-class InputRequired(validators.InputRequired):
-    def __call__(self, form, field):
-        if not field.raw_data or not field.raw_data[0]:
-            if self.message is None:
-                message = field.gettext('{}は必須です'.format(field.label.text))
-            else:
-                message = self.message
-
-            field.errors[:] = []
-            raise StopValidation(message)
-
-
 class FileAllowed(file.FileAllowed):
     def __call__(self, form, field):
         if not field.has_file():

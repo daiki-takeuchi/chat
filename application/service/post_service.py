@@ -4,9 +4,6 @@ from application.domain.repository.post_repository import PostRepository
 class PostService(object):
     repository = PostRepository()
 
-    def find_all(self, page):
-        return self.repository.find_all(page)
-
     def find_by_id(self, post_id):
         return self.repository.find_by_id(post_id)
 

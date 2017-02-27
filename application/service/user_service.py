@@ -7,9 +7,6 @@ class UserService(object):
     def find(self, page, user_name):
         return self.repository.find(page, user_name)
 
-    def find_all(self, page):
-        return self.repository.find_all(page)
-
     def find_by_id(self, user_id):
         return self.repository.find_by_id(user_id)
 
@@ -18,6 +15,3 @@ class UserService(object):
 
     def save(self, user):
         return self.repository.save(user)
-
-    def destroy(self, user):
-        return self.repository.destroy(user)

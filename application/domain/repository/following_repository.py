@@ -17,19 +17,5 @@ class FollowingRepository(BaseRepository):
             ret = self.create()
         return ret
 
-    def find_follower(self, page, user_id):
-        query = self.model.query
-        if user_id:
-            query = query.filter(self.model.following_id == user_id)
-        pagination = query.order_by(self.model.created_at.desc()).paginate(page, self.model.PER_PAGE)
-        return pagination
-
-    def find_following(self, page, user_id):
-        query = self.model.query
-        if user_id:
-            query = query.filter(self.model.user_id == user_id)
-        pagination = query.order_by(self.model.created_at.desc()).paginate(page, self.model.PER_PAGE)
-        return pagination
-
     def create(self):
         return Following()
