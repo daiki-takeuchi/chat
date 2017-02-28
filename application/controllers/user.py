@@ -73,10 +73,9 @@ def login():
     # ログイン処理
     if form.validate_on_submit():
         user = service.find_by_mail(form.mail.data)
-        if user is not None:
-            # セッションにユーザ名を保存してからインデックスページにリダイレクトする
-            session['user'] = user.serialize()
-            return redirect('/')
+        # セッションにユーザ名を保存してからインデックスページにリダイレクトする
+        session['user'] = user.serialize()
+        return redirect('/')
     # ログインページを表示する
     return render_template('user/login.html', form=form)
 

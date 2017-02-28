@@ -78,3 +78,33 @@ class PostTests(BaseTestCase):
         result = self.app.get('/delete/' + str(post.id))
         self.assertEqual(result.status_code, 302)
         ok_('/' in result.headers['Location'])
+
+    # 自分以外の発言は削除できない
+    def test_delete_tweet_fail(self):
+        # ログインする
+        mail = 'test@test.com'
+        self.app.post('/login', data={
+            'mail': mail,
+            'password': 'test'
+        })
+
+        # 1件ツイートを作成
+        self.app.post('/', data={'content': 'test1'})
+        # 自分のツイートを検索
+        user = self.user_repository.find_by_mail(mail)
+        posts = self.post_repository.find_by_user_id(page=1, user_id=user.id)
+        # 最新1件目
+        post = posts.items[0]
+
+        # ログアウトして別ユーザーでログウイン
+        self.app.get('/logout')
+        self.app.post('/login', data={
+            'mail': 'test@test2.com',
+            'password': 'test'
+        })
+
+        result = self.app.get('/delete/' + str(post.id))
+        self.assertEqual(result.status_code, 302)
+
+        actual = self.post_repository.find_by_id(post.id)
+        self.assertIsNotNone(actual)

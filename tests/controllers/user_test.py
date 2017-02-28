@@ -29,6 +29,13 @@ class UserTests(BaseTestCase):
         self.assertEqual(result.status_code, 302)
         ok_('/' in result.headers['Location'])
 
+    def test_login_fail(self):
+        result = self.app.post('/login', data={
+            'mail': 'not_exist_user@test.com',
+            'password': 'test'
+        })
+        self.assertEqual(result.status_code, 200)
+
     def test_logout(self):
         # ログインする
         self.app.post('/login', data={
