@@ -63,7 +63,12 @@ build:
         name: mysql information
         code: |
           mysql --version
-#          mysql -h$MYSQL_PORT_3306_TCP_ADDR -P$MYSQL_PORT_3306_TCP_PORT -D$MYSQL_ENV_MYSQL_DATABASE -u$MYSQL_ENV_MYSQL_USER -p$MYSQL_ENV_MYSQL_PASSWORD < data/sql/01-schema.sql
+          mysql -h$MYSQL_PORT_3306_TCP_ADDR -P$MYSQL_PORT_3306_TCP_PORT -D$MYSQL_ENV_MYSQL_DATABASE -u$MYSQL_ENV_MYSQL_USER -p$MYSQL_ENV_MYSQL_PASSWORD < data/sql/01-schema.sql
+          mysql -h$MYSQL_PORT_3306_TCP_ADDR -P$MYSQL_PORT_3306_TCP_PORT -D$MYSQL_ENV_MYSQL_DATABASE -u$MYSQL_ENV_MYSQL_USER -p$MYSQL_ENV_MYSQL_PASSWORD < data/sql/02-data-users.sql
+          mysql -h$MYSQL_PORT_3306_TCP_ADDR -P$MYSQL_PORT_3306_TCP_PORT -D$MYSQL_ENV_MYSQL_DATABASE -u$MYSQL_ENV_MYSQL_USER -p$MYSQL_ENV_MYSQL_PASSWORD < data/sql/03-data-posts.sql
+          mysql -h$MYSQL_PORT_3306_TCP_ADDR -P$MYSQL_PORT_3306_TCP_PORT -D$MYSQL_ENV_MYSQL_DATABASE -u$MYSQL_ENV_MYSQL_USER -p$MYSQL_ENV_MYSQL_PASSWORD < data/sql/04-data-following.sql
+test:
+  steps:
     - script:
         name: execute test
         code: |
