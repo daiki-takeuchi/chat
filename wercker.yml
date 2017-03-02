@@ -50,6 +50,10 @@ build:
     # A custom script step, name value is used in the UI
     # and the code value contains the command that get executed
     - script:
+        name: mysql test
+        code: |
+          mysql -uroot -ppassword < data/sql/00-database.sql
+    - script:
         name: execute test
         code: |
           nosetests --cover-tests --with-coverage --cover-erase --cover-package=application --cover-branches          
