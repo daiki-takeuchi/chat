@@ -13,9 +13,9 @@ services:
   - id: mysql
     env:
       MYSQL_ROOT_PASSWORD: password
-      MYSQL_USER: chat_user_test
-      MYSQL_PASSWORD: chat_user_test
-      MYSQL_DATABASE: chat_db_test
+#      MYSQL_USER: chat_user_test
+#      MYSQL_PASSWORD: chat_user_test
+#      MYSQL_DATABASE: chat_db_test
     # - postgres
     # http://devcenter.wercker.com/docs/services/postgresql.html
 
@@ -63,13 +63,21 @@ build:
         name: mysql information
         code: |
           mysql --version
-          mysql -h$MYSQL_PORT_3306_TCP_ADDR -P$MYSQL_PORT_3306_TCP_PORT -D$MYSQL_ENV_MYSQL_DATABASE -u$MYSQL_ENV_MYSQL_USER -p$MYSQL_ENV_MYSQL_PASSWORD < data/sql/01-schema.sql
-          mysql -h$MYSQL_PORT_3306_TCP_ADDR -P$MYSQL_PORT_3306_TCP_PORT -D$MYSQL_ENV_MYSQL_DATABASE -u$MYSQL_ENV_MYSQL_USER -p$MYSQL_ENV_MYSQL_PASSWORD < data/sql/02-data-users.sql
-          mysql -h$MYSQL_PORT_3306_TCP_ADDR -P$MYSQL_PORT_3306_TCP_PORT -D$MYSQL_ENV_MYSQL_DATABASE -u$MYSQL_ENV_MYSQL_USER -p$MYSQL_ENV_MYSQL_PASSWORD < data/sql/03-data-posts.sql
-          mysql -h$MYSQL_PORT_3306_TCP_ADDR -P$MYSQL_PORT_3306_TCP_PORT -D$MYSQL_ENV_MYSQL_DATABASE -u$MYSQL_ENV_MYSQL_USER -p$MYSQL_ENV_MYSQL_PASSWORD < data/sql/04-data-following.sql
+          mysql -h$MYSQL_PORT_3306_TCP_ADDR -P$MYSQL_PORT_3306_TCP_PORT -uroot -Dmysql -p$MYSQL_ENV_MYSQL_ROOT_PASSWORD < data/sql/00-database.sql
+          mysql -h$MYSQL_PORT_3306_TCP_ADDR -P$MYSQL_PORT_3306_TCP_PORT -Dmysql -uchat_user_test -pchat_user_test < data/sql/01-schema.sql
+          mysql -h$MYSQL_PORT_3306_TCP_ADDR -P$MYSQL_PORT_3306_TCP_PORT -Dchat_db_test -uchat_user_test -pchat_user_test < data/sql/01-schema.sql
+          mysql -h$MYSQL_PORT_3306_TCP_ADDR -P$MYSQL_PORT_3306_TCP_PORT -Dchat_db_test -uchat_user_test -pchat_user_test < data/sql/02-data-users.sql
+          mysql -h$MYSQL_PORT_3306_TCP_ADDR -P$MYSQL_PORT_3306_TCP_PORT -Dchat_db_test -uchat_user_test -pchat_user_test < data/sql/03-data-posts.sql
+          mysql -h$MYSQL_PORT_3306_TCP_ADDR -P$MYSQL_PORT_3306_TCP_PORT -Dchat_db_test -uchat_user_test -pchat_user_test < data/sql/04-data-following.sql
 test:
   steps:
     - script:
         name: execute test
         code: |
           nosetests --cover-tests --with-coverage --cover-erase --cover-package=application --cover-branches          
+deploy:
+  steps:
+    - script:
+        name: deploy gae
+        code: |
+          echo "python version $(python --version) running"
