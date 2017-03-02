@@ -13,9 +13,9 @@ services:
   - id: mysql
     env:
       MYSQL_ROOT_PASSWORD: password
-      MYSQL_USER: admin_user_test
-      MYSQL_PASSWORD: admin_user_test
-      MYSQL_DATABASE: chat_test
+      MYSQL_USER: chat_user_test
+      MYSQL_PASSWORD: chat_user_test
+      MYSQL_DATABASE: chat_db_test
     # - postgres
     # http://devcenter.wercker.com/docs/services/postgresql.html
 
