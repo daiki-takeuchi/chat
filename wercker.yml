@@ -50,6 +50,16 @@ build:
     # A custom script step, name value is used in the UI
     # and the code value contains the command that get executed
     - script:
+        name: echo python information
+        code: |
+          echo "python version $(python --version) running"
+          echo "pip version $(pip --version) running"
+    - script:
+        name: install mysql-client
+        code: |
+          sudo apt-get update
+          sudo apt-get -y install mysql-client
+    - script:
         name: mysql test
         code: |
           mysql -uroot -ppassword < data/sql/00-database.sql
