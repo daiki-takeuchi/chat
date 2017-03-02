@@ -59,6 +59,7 @@ build:
         code: |
           sudo apt-get update
           sudo apt-get -y install mysql-client
+          mysql --version
     - script:
         name: mysql test
         code: |
