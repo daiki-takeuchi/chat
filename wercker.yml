@@ -69,8 +69,6 @@ build:
           mysql -h$MYSQL_PORT_3306_TCP_ADDR -P$MYSQL_PORT_3306_TCP_PORT -Dchat_db_test -uchat_user_test -pchat_user_test < data/sql/02-data-users.sql
           mysql -h$MYSQL_PORT_3306_TCP_ADDR -P$MYSQL_PORT_3306_TCP_PORT -Dchat_db_test -uchat_user_test -pchat_user_test < data/sql/03-data-posts.sql
           mysql -h$MYSQL_PORT_3306_TCP_ADDR -P$MYSQL_PORT_3306_TCP_PORT -Dchat_db_test -uchat_user_test -pchat_user_test < data/sql/04-data-following.sql
-test:
-  steps:
     - script:
         name: execute test
         code: |
