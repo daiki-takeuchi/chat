@@ -64,7 +64,7 @@ build:
         code: |
           mysql --version
           mysql -h$MYSQL_PORT_3306_TCP_ADDR -P$MYSQL_PORT_3306_TCP_PORT -uroot -Dmysql -p$MYSQL_ENV_MYSQL_ROOT_PASSWORD < data/sql/00-database.sql
-          mysql -h$MYSQL_PORT_3306_TCP_ADDR -P$MYSQL_PORT_3306_TCP_PORT -Dmysql -uchat_user_test -pchat_user_test < data/sql/01-schema.sql
+          mysql -h$MYSQL_PORT_3306_TCP_ADDR -P$MYSQL_PORT_3306_TCP_PORT -Dchat_db_test -uchat_user_test -pchat_user_test < data/sql/01-schema.sql
           mysql -h$MYSQL_PORT_3306_TCP_ADDR -P$MYSQL_PORT_3306_TCP_PORT -Dchat_db_test -uchat_user_test -pchat_user_test < data/sql/01-schema.sql
           mysql -h$MYSQL_PORT_3306_TCP_ADDR -P$MYSQL_PORT_3306_TCP_PORT -Dchat_db_test -uchat_user_test -pchat_user_test < data/sql/02-data-users.sql
           mysql -h$MYSQL_PORT_3306_TCP_ADDR -P$MYSQL_PORT_3306_TCP_PORT -Dchat_db_test -uchat_user_test -pchat_user_test < data/sql/03-data-posts.sql
