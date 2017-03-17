@@ -34,7 +34,7 @@ build:
           echo "python version $(python --version) running"
           echo "pip version $(pip --version) running"
     - script:
-        name: install mysql-client unzip
+        name: install mysql-client
         code: |
           sudo apt-get update
           sudo apt-get -y install mysql-client
