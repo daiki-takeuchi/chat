@@ -1,10 +1,12 @@
+import os
+
 DEBUG = False
 TESTING = True
 WTF_CSRF_ENABLED = False
 
 # CloudSQL & SQLAlchemy configuration
-HOST = 'localhost'
-PORT = '3306'
+HOST = os.getenv('MYSQL_PORT_3306_TCP_ADDR', 'localhost')
+PORT = os.getenv('MYSQL_PORT_3306_TCP_PORT', '3306')
 USER = 'chat_user_test'
 PASSWORD = 'chat_user_test'
 DATABASE = 'chat_db_test'
