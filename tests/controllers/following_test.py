@@ -38,6 +38,24 @@ class FollowingTests(BaseTestCase):
         result = self.app.get('/following/' + str(user.id))
         self.assertEqual(result.status_code, 302)
 
+    # フォロー済みのユーザーはFollowできない。
+    def test_following_fail(self):
+        mail = 'test@test.com'
+        user = self.user_repository.find_by_mail(mail)
+        before = len(user.following)
+        # ログインする
+        self.app.post('/login', data={
+            'mail': mail,
+            'password': 'test'
+        })
+        # フォローする
+        result = self.app.get('/following/' + str(user.following[0].following_id))
+        self.assertEqual(result.status_code, 302)
+
+        after = len(user.following)
+        # 前後で件数が変わっていないことを確認
+        self.assertEqual(before, after)
+
     # follow解除する。
     def test_unfollowing(self):
         mail = datetime.datetime.now().strftime('%Y%m%d-%H%M%S') + '@test.com'
