@@ -52,6 +52,7 @@ class FollowingTests(BaseTestCase):
         result = self.app.get('/following/' + str(user.following[0].following_id))
         self.assertEqual(result.status_code, 302)
 
+        user = self.user_repository.find_by_mail(mail)
         after = len(user.following)
         # 前後で件数が変わっていないことを確認
         self.assertEqual(before, after)
@@ -81,3 +82,22 @@ class FollowingTests(BaseTestCase):
         # フォロー解除する
         result = self.app.get('/unfollow/' + str(user.id))
         self.assertEqual(result.status_code, 302)
+
+    # フォローしてないユーザーはフォロー解除できない。
+    def test_unfollowing_fail(self):
+        mail = 'test@test.com'
+        user = self.user_repository.find_by_mail(mail)
+        before = len(user.following)
+        # ログインする
+        self.app.post('/login', data={
+            'mail': mail,
+            'password': 'test'
+        })
+        # フォロー解除する
+        result = self.app.get('/unfollow/10')
+        self.assertEqual(result.status_code, 302)
+
+        user = self.user_repository.find_by_mail(mail)
+        after = len(user.following)
+        # 前後で件数が変わっていないことを確認
+        self.assertEqual(before, after)
