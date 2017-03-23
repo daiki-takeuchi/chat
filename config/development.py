@@ -8,7 +8,7 @@ USER = 'bc490c93bfba0a'
 PASSWORD = 'db4577d5'
 DATABASE = 'heroku_2fe043177fc40e6'
 SQLALCHEMY_DATABASE_URI = (
-    'mysql://{user}:{password}@{host}:{port}/{database}').format(
+    'mysql://{user}:{password}@{host}:{port}/{database}?reconnect=true').format(
         user=USER, password=PASSWORD, host=HOST, port=PORT, database=DATABASE)
 SQLALCHEMY_TRACK_MODIFICATIONS = True
 
