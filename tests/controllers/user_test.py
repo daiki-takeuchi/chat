@@ -140,6 +140,27 @@ class UserTests(BaseTestCase):
         self.assertEqual(result.status_code, 302)
         ok_('/' in result.headers['Location'])
 
+    # 既にあるメールアドレスには変更できない。
+    def test_post_profile_fail(self):
+        # ログインする
+        mail = 'test@test.com'
+        self.app.post('/login', data={
+            'mail': 'test@test.com',
+            'password': 'test'
+        })
+        user = self.repository.find_by_mail(mail)
+
+        result = self.app.post('/profile/' + str(user.id), data={
+            'user_name': user.user_name,
+            'mail': 'test@test1.com',
+            'self_introduction': 'test',
+            'job': ['Designer', 'Coder']
+        })
+        user = self.repository.find_by_id(user.id)
+
+        self.assertEqual(result.status_code, 200)
+        self.assertEqual(user.mail, mail)
+
     # ユーザー検索画面に遷移できる
     def test_get_index(self):
         # ログインする

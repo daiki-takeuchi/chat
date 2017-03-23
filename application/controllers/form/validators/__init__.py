@@ -33,23 +33,3 @@ class DataRequired(validators.DataRequired):
 
             field.errors[:] = []
             raise StopValidation(message)
-
-
-class FileAllowed(file.FileAllowed):
-    def __call__(self, form, field):
-        if not field.has_file():
-            return
-
-        filename = field.data.filename.lower()
-
-        if isinstance(self.upload_set, (tuple, list)):
-            if any(filename.endswith('.' + x) for x in self.upload_set):
-                return
-            message = (
-                'File does not end with any of the allowed extentions: {}'
-            ).format(self.upload_set)
-            raise StopValidation(self.message or message)
-
-        if not self.upload_set.file_allowed(field.data, filename):
-            raise StopValidation(self.message or
-                                 'この拡張子のファイルは保存できません')

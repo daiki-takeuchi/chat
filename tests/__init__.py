@@ -1,7 +1,7 @@
-import datetime
 import unittest
 
 from application import app, db
+from tests.fixture import init_data
 
 
 class BaseTestCase(unittest.TestCase):
@@ -15,7 +15,7 @@ class BaseTestCase(unittest.TestCase):
         cls.app.testing = True
         db.drop_all()
         db.create_all()
-        cls().create_user()
+        init_data()
 
     @classmethod
     def tearDownClass(cls):
@@ -26,23 +26,3 @@ class BaseTestCase(unittest.TestCase):
 
     def tearDown(self):
         pass
-
-    def create_user(self):
-        self.app.post('/register', data={
-            'user_name': '単体テスト1',
-            'mail': 'test@test.com',
-            'password': 'test',
-            'password_confirmation': 'test'
-        })
-        self.app.post('/register', data={
-            'user_name': '単体テスト2',
-            'mail': 'test@test2.com',
-            'password': 'test',
-            'password_confirmation': 'test'
-        })
-        self.app.post('/register', data={
-            'user_name': '単体テスト3',
-            'mail': datetime.datetime.now().strftime('%Y%m%d-%H%M%S') + '@test.com',
-            'password': 'test',
-            'password_confirmation': 'test'
-        })
