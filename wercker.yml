@@ -74,8 +74,8 @@ build:
         code: |
           nosetests --cover-tests --with-coverage --cover-erase --cover-package=application --cover-branches          
 deploy:
-  steps:
-    - script:
-        name: deploy gae
-        code: |
-          echo "python version $(python --version) running"
+    steps:
+        - heroku-deploy:
+            key: $HEROKU_KEY
+            user: $HEROKU_USER
+            app-name: $HEROKU_APP_NAME

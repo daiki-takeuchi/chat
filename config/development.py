@@ -2,11 +2,11 @@ DEBUG = False
 TESTING = False
 
 # CloudSQL & SQLAlchemy configuration
-HOST = '146.148.78.74'
+HOST = 'us-cdbr-iron-east-03.cleardb.net'
 PORT = '3306'
-USER = 'chat_user'
-PASSWORD = 'chat_user'
-DATABASE = 'chat_db'
+USER = 'bc490c93bfba0a'
+PASSWORD = 'db4577d5'
+DATABASE = 'heroku_2fe043177fc40e6'
 SQLALCHEMY_DATABASE_URI = (
     'mysql://{user}:{password}@{host}:{port}/{database}').format(
         user=USER, password=PASSWORD, host=HOST, port=PORT, database=DATABASE)
