@@ -86,8 +86,8 @@
                                     <div class="col-lg-10 col-lg-offset-1">
                                         {% for subfield in form.job %}
                                         <div class="col-sm-4">
-                                            <div class="choice{% if user.job or ''.count(subfield.data) %} active{% endif %}" data-toggle="wizard-checkbox">
-                                                {% if user.job or ''.count(subfield.data) %}
+                                            <div class="choice{% if (user.job or '').count(subfield.data) %} active{% endif %}" data-toggle="wizard-checkbox">
+                                                {% if (user.job or '').count(subfield.data) %}
                                                 {{ subfield(checked=True) }}
                                                 {% else %}
                                                 {{ subfield }}
