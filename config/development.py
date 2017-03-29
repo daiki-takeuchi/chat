@@ -11,7 +11,7 @@ SQLALCHEMY_DATABASE_URI = (
     'mysql://{user}:{password}@{host}:{port}/{database}').format(
         user=USER, password=PASSWORD, host=HOST, port=PORT, database=DATABASE)
 SQLALCHEMY_TRACK_MODIFICATIONS = True
-SQLALCHEMY_POOL_RECYCLE = 499
+SQLALCHEMY_POOL_RECYCLE = 60
 SQLALCHEMY_POOL_TIMEOUT = 20
 
 # The secret key is used by Flask to encrypt session cookies.
