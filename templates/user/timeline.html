@@ -12,19 +12,21 @@
                         {{ p.pagination_widget(timelines,'.page', user_id=user.id) }}
                     {% endif %}
                 {% endif %}
-                <div class="table-responsive">
+                <div class="">
                     <table class="table table-hover">
                         <tbody>
                             {% for timeline in timelines.items %}
                             <tr>
-                                <td width="40px">
+                                <td style="width:50px;white-space:normal;">
                                     <div>
                                         <img class="img-circle" src="{{ url_for('static', filename='img/default-avatar.png') }}">
                                     </div>
                                 </td>
-                                <td width="100px"><a href="{{ url_for('user.detail', user_id=timeline.user_id) }}">{{ timeline.user.user_name }}</a></td>
-                                <td>{{ timeline.content }}</td>
-                                <td class="td-actions text-right">
+                                <td style="white-space:normal;font-size: small;">
+                                    <p style="margin: 0;font-weight: bold;"><a href="{{ url_for('user.detail', user_id=timeline.user_id) }}">{{ timeline.user.user_name }}</a></p>
+                                    <p style="margin: 0;">{{ timeline.content }}</p>
+                                </td>
+                                <td style="white-space:normal;" class="td-actions text-right">
                                     {% if timeline.user_id == session.user.id %}
                                     <a href="{{ url_for('post.delete', post_id=timeline.id) }}" rel="tooltip" class="btn btn-danger">
                                         <i class="material-icons">close</i>
