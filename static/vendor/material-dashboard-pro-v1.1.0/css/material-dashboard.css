@@ -3862,9 +3862,15 @@ be a descendant of the grid when it is being dragged.
 .wizard-card[data-color="rose"] .picture:hover {
   border-color: #e91e63;
 }
-.wizard-card[data-color="rose"] .choice:hover .icon, .wizard-card[data-color="rose"] .choice.active .icon {
+.wizard-card[data-color="rose"] .choice.active .icon {
   border-color: #e91e63;
   color: #e91e63;
+}
+@media screen and (min-width:480px) {
+  .wizard-card[data-color="rose"] .choice:hover .icon {
+    border-color: #e91e63;
+    color: #e91e63;
+  }
 }
 .wizard-card[data-color="rose"] .form-group .form-control {
   background-image: linear-gradient(#e91e63, #e91e63), linear-gradient(#D2D2D2, #D2D2D2);
@@ -3943,8 +3949,13 @@ be a descendant of the grid when it is being dragged.
   font-size: 40px;
   line-height: 111px;
 }
-.wizard-card .choice:hover .icon, .wizard-card .choice.active .icon {
+.wizard-card .choice.active .icon {
   border-color: #2ca8ff;
+}
+@media screen and (min-width:480px) {
+  .wizard-card .choice:hover .icon {
+    border-color: #2ca8ff;
+  }
 }
 .wizard-card .choice input[type="radio"],
 .wizard-card .choice input[type="checkbox"] {
