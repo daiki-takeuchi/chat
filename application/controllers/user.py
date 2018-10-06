@@ -1,6 +1,5 @@
 from flask import Blueprint
 from flask import abort
-from flask import current_app
 from flask import flash
 from flask import redirect
 from flask import render_template
@@ -50,7 +49,7 @@ def page(user_id, page=1):
 @bp.route('/register', methods=['GET', 'POST'])
 def register():
     user = service.find_by_id(user_id=None)
-    form = SignUpForm(request.form, user)
+    form = SignUpForm(request.form, obj=user)
 
     if form.validate_on_submit():
         user.user_name = form.user_name.data
@@ -95,7 +94,7 @@ def profile(user_id):
     if str(user_id) != str(session['user']['id']):
         return abort(404)
     user = service.find_by_id(user_id)
-    form = UserForm(request.form, user)
+    form = UserForm(request.form, obj=user)
     if form.validate_on_submit():
         user.user_name = form.user_name.data
         user.mail = form.mail.data
