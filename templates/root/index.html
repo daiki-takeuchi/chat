@@ -42,17 +42,15 @@
                             {{ form.hidden_tag() }}
                             <div class="row">
                                 <div class="col-md-10">
-                                    <div class="form-group">
-                                        <div class="form-group label-floating{% if form.content.errors %} has-error is-focused{% endif %}">
-                                            <label class="control-label">{{ form.content.label.text }}</label>
-                                            {{ form.content(class_="form-control", required="true") }}
-                                            <span class="help-block with-errors">
-                                            {% for error in form.content.errors %}
-                                                <p style="margin: 0;" class="has-error">{{error}}</p>
-                                            {% endfor %}
-                                            </span>
+                                    <div class="form-group label-floating{% if form.content.errors %} has-error is-focused{% endif %}">
+                                        <label class="control-label">{{ form.content.label.text }}</label>
+                                        {{ form.content(class_="form-control", required="true") }}
+                                        <span class="help-block with-errors">
+                                        {% for error in form.content.errors %}
+                                            <p style="margin: 0;" class="has-error">{{error}}</p>
+                                        {% endfor %}
+                                        </span>
                                         </div>
-                                    </div>
                                 </div>
                                 <div class="col-md-2">
                                     <button type="submit" class="btn btn-rose pull-right">Tweet</button>
