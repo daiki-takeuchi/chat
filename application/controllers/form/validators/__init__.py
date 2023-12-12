@@ -1,7 +1,5 @@
-from flask_wtf import file
 from wtforms import ValidationError
 from wtforms import validators
-from wtforms.compat import string_types
 from wtforms.validators import StopValidation
 
 
@@ -25,7 +23,7 @@ class Length(validators.Length):
 
 class DataRequired(validators.DataRequired):
     def __call__(self, form, field):
-        if not field.data or isinstance(field.data, string_types) and not field.data.strip():
+        if not field.data and not field.data.strip():
             if self.message is None:
                 message = field.gettext('{}は必須です'.format(field.label.text))
             else:

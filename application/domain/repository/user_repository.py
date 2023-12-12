@@ -15,7 +15,7 @@ class UserRepository(BaseRepository):
         query = self.model.query
         if user_name:
             query = query.filter(self.model.user_name.like('%' + user_name + '%'))
-        pagination = query.paginate(page, self.model.PER_PAGE)
+        pagination = query.paginate(page=page, per_page=self.model.PER_PAGE)
         return pagination
 
     def find_by_mail(self, mail):
